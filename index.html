@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Promise</title>
+    <!-- <script src="./myPromise/Promise.js"></script> -->
+    <script src="./myPromise/myPromise3.js"></script>
+</head>
+<body>
+    <script>
+        function fetch(flag) {
+            return new myPromise((resolve, reject) => {
+                setTimeout(() => {
+                    if(flag) {
+                        resolve('OK')
+                    } else {
+                        reject('error')
+                    }
+                }, 1000)
+            })
+        }
+        let p1 = new myPromise((resolve, reject) => {
+            resolve('p1 ok')
+        })
+        let p2 = new myPromise((resolve, reject) => {
+            reject('p2 no')
+        })
+        let p3 = new myPromise((resolve, reject) => {
+            reject('p3 no')
+        })
+        myPromise.all([p1, p2, p3]).then(res => {
+            console.log('res', res);
+        }, err => {
+            console.log('err', err); // p2 no
+        })
+        // fetch(true).then(data => {
+        //     console.log('resolve', data);
+        // })
+        // fetch(true).then(data => {
+        //     // console.log('data', data);
+        //     return new myPromise(resolve => {
+        //         resolve(data + "promiseSuccess")
+        //     })
+        // }).then(res => {
+        //     console.log('res', res);
+        // })
+        // let p = new Promise((resolve, reject) => {
+        //     resolve("OK")
+        //     // throw 'error'
+        //     // setTimeout(() => {
+        //     //     resolve("OK")
+        //     // }, 1000)
+        // })
+        // console.log('p', p);
+        // p.then(resolve => {
+        //     console.log('resolve', resolve);
+        // }, reject => {
+        //     console.log('reject', reject);
+        // })
+    </script>
+
+</body>
+</html>
